@@ -1,0 +1,19 @@
+import json
+from django.forms.models import model_to_dict
+from django.http import JsonResponse
+
+
+#JSON response accepts a dict as an argument
+
+
+from products.models import Product
+
+def api_home(request, *args, **kwargs):
+    model_data = Product.objects.all().order_by("?").first()
+    data = {}
+    if model_data:
+        data = model_to_dict(model_data, fields=['id', 'title', 'price']) 
+    return JsonResponse(data) # {"message": "Hello, 47,  a response from Django API"}
+    # model instance (model_data)
+    # turn a Python dict
+    # return JSON to my client
