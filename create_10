@@ -1,0 +1,15 @@
+import requests
+
+endpoint = "http://localhost:8000/api/products/" # "http://127.0.0.1:8000/"
+# http://localhost:8000/admin/
+# session -> post data
+# selenium (keep the session and emulates a browser) 
+# - not ideal for API when exposed to third-party users
+
+data = {
+    "title": "Welcome back, 47!",
+    "price": "100"
+
+}
+get_response = requests.post(endpoint, json=data) # HTTP Request
+print(get_response.json())
