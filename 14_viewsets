@@ -1,0 +1,28 @@
+from rest_framework import viewsets, mixins
+from api.mixins import StaffEditorPermissionMixin
+
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductViewSet(StaffEditorPermissionMixin, viewsets.ModelViewSet):
+    """
+    get -> list -> Queryset
+    get -> retreive -> Product Instance Detail View
+    post -> create -> New Instance
+    put -> Update
+    patch-> Partial Update
+    delete -> Destroy
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk' #default
+    
+class ProductGenericViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
+    """
+    get -> list -> Queryset
+    get -> retreive -> product Instance Detail View
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk' #default
+    
